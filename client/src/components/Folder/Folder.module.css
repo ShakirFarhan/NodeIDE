@@ -1,0 +1,50 @@
+.folder__container {
+  padding-left: 0.96rem;
+  padding-top: 0.2rem;
+  width: 100%;
+  cursor: pointer;
+}
+.root__folder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.root__folder > button {
+  letter-spacing: 0.3px;
+}
+.root__folder div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+  position: absolute;
+  right: 0.5rem;
+}
+.root__folder div button {
+  color: #c2c8cc;
+  font-size: 1rem;
+}
+.folder__container button {
+  background: transparent;
+  border: none;
+}
+.name span {
+  font-size: 0.92rem;
+  font-weight: 300;
+}
+.icons {
+  font-size: 1.2rem;
+  background: transparent;
+  background-color: transparent;
+}
+.name {
+  color: #c2c8cc;
+
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  cursor: pointer;
+  margin-top: 3px;
+}
