@@ -35,7 +35,7 @@ const Folder = ({
   };
   const onAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && name) {
-      const tree = insertNode(nodes, nodes.id, {
+      insertNode(nodes, nodes.id, {
         name,
         isFolder: showInput.isFolder,
       });
