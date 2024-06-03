@@ -12,14 +12,14 @@ import { generateFileTree } from '../helpers/files.js';
 import fs from 'fs/promises';
 const router = express.Router();
 router.get('/files', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const tree = yield generateFileTree('./src/user');
+    const tree = yield generateFileTree('./user');
     res.json({ tree });
 }));
 router.get('/file/content', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { path } = req.query;
     if (!path)
         return res.status(400).json({ message: 'Provide path' });
-    const content = yield fs.readFile(`./src/user/${path}`, 'utf-8');
+    const content = yield fs.readFile(`./user${path}`, 'utf-8');
     console.log('here' + content);
     res.status(200).json({ content });
 }));

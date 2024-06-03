@@ -17,7 +17,7 @@ ptyProcess.onData((data) => {
   io.emit('terminal:data', data);
 });
 
-chokidar.watch('./src/user').on('all', (event, path) => {
+chokidar.watch('./user').on('all', (event, path) => {
   io.emit('file:refresh', path);
 });
 io.on('connection', (socket) => {
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
       }[];
     }) => {
       try {
-        const filePath = `./src/user${path}`;
+        const filePath = `./user${path}`;
         let fileContent = await fs.readFile(filePath, 'utf-8');
         changes.forEach((change) => {
           if (change.type === 'removed') {

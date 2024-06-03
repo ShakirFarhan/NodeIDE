@@ -60,23 +60,24 @@ function Home() {
         <FolderStructure onSelect={handleOnSelect} />
       </div>
       <div className={styles.editor}>
-        {selectedFile && (
-          <div className={styles.editor__header}>
-            <p>{selectedFile.replace(/\//g, ' > ')}</p>
-
-            <div>
-              <button onClick={handleTerminal}>
-                {terminalVisible ? 'Close' : 'Open'} Terminal
-              </button>
-            </div>
+        <div className={styles.editor__header}>
+          <div>
+            {selectedFile && <p>{selectedFile.replace(/\//g, ' > ')}</p>}
           </div>
-        )}
+
+          <div>
+            <button onClick={handleTerminal}>
+              {terminalVisible ? 'Close' : 'Open'} Terminal
+            </button>
+          </div>
+        </div>
+
         <div className={styles.code__editor}>
           {selectedFile && <Editor code={code} setCode={setCode} />}
         </div>
         <div
           style={{
-            visibility: terminalVisible && selectedFile ? 'visible' : 'hidden',
+            visibility: terminalVisible ? 'visible' : 'hidden',
           }}
           className={styles.editor__terminal}
         >

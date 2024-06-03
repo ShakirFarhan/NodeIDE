@@ -24,7 +24,7 @@ app.use('/', filesRoutes);
 ptyProcess.onData((data) => {
     io.emit('terminal:data', data);
 });
-chokidar.watch('./src/user').on('all', (event, path) => {
+chokidar.watch('./user').on('all', (event, path) => {
     io.emit('file:refresh', path);
 });
 io.on('connection', (socket) => {
@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
     });
     socket.on('file:write', (_a) => __awaiter(void 0, [_a], void 0, function* ({ path, changes, }) {
         try {
-            const filePath = `./src/user${path}`;
+            const filePath = `./user${path}`;
             let fileContent = yield fs.readFile(filePath, 'utf-8');
             changes.forEach((change) => {
                 if (change.type === 'removed') {
