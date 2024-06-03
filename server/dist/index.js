@@ -34,9 +34,33 @@ io.on('connection', (socket) => {
             ptyProcess.write(data);
         }
     });
-    socket.on('file:write', (_a) => __awaiter(void 0, [_a], void 0, function* ({ path, code }) {
-        console.log(path, code);
-        yield fs.writeFile(`./src/user${path}`, code);
+    socket.on('file:write', (_a) => __awaiter(void 0, [_a], void 0, function* ({ path, changes, }) {
+        try {
+            const filePath = `./src/user${path}`;
+            let fileContent = yield fs.readFile(filePath, 'utf-8');
+            changes.forEach((change) => {
+                if (change.type === 'removed') {
+                    const index = fileContent.indexOf(change.value, change.index);
+                    if (index !== -1) {
+                        fileContent =
+                            fileContent.slice(0, index) +
+                                fileContent.slice(index + change.value.length);
+                    }
+                }
+                else if (change.type === 'added') {
+                    fileContent =
+                        fileContent.slice(0, change.index) +
+                            change.value +
+                            fileContent.slice(change.index);
+                }
+            });
+            console.log(fileContent);
+            yield fs.writeFile(filePath, fileContent);
+            console.log(`File ${path} updated successfully`);
+        }
+        catch (error) {
+            console.error(`Error updating file ${path}: `, error);
+        }
     }));
 });
 server.listen(PORT, () => {

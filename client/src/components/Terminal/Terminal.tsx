@@ -11,6 +11,7 @@ const Terminal = () => {
       socket.emit('terminal:write', data);
     });
     socket.on('terminal:data', (data) => {
+      console.log('DATA : ', data);
       XTerminal.write(data);
     });
     XTerminal.open(terminalRef.current as HTMLElement);

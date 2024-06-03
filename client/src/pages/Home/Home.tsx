@@ -4,6 +4,7 @@ import Terminal from '../../components/Terminal/Terminal';
 import styles from './Home.module.css';
 import { useEffect, useState } from 'react';
 import socket from '../../lib/socket';
+import { calculateDiff } from '../../utils/calculateDiff';
 function Home() {
   const [code, setCode] = useState('');
   const [fileContent, setFileContent] = useState('');
@@ -35,12 +36,16 @@ function Home() {
   useEffect(() => {
     if (selectedFile) {
       const timer = setTimeout(() => {
-        // const diff = code.replace(fileContent, '');
+        const changes = calculateDiff(fileContent, code);
 
-        socket.emit('file:write', {
-          path: selectedFile,
-          code,
-        });
+        if (changes.length > 0) {
+          socket.emit('file:write', {
+            path: selectedFile,
+            changes,
+          });
+
+          setFileContent(code);
+        }
       }, 5000);
 
       return () => {

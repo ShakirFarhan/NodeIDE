@@ -1,9 +1,12 @@
 .main__container {
   width: 100%;
   display: flex;
-  max-height: 100vh;
+  height: 100vh;
   /* justify-content: space-between; */
   column-gap: 0.8rem;
+}
+.folders__container {
+  height: 100vh;
   overflow-y: hidden;
 }
 
@@ -15,6 +18,8 @@
 }
 .folders__container {
   width: 350px;
+  height: 100%;
+
   border-right: 0.5px solid #313136;
 }
 
